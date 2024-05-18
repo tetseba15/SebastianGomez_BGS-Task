@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
 	private IInteractable interactableInstance;
 
 	private Vector2 movement;
-	private bool canInteract;
 	private bool interactPressed;
 
 	private void Awake()
@@ -29,8 +28,6 @@ public class PlayerController : MonoBehaviour
 	{
 		PlayerInput();
 
-		Debug.Log(interactPressed);
-
 		if(interactPressed)
 			TryInteract();
 
@@ -42,6 +39,7 @@ public class PlayerController : MonoBehaviour
 		Move();
 	}
 
+	#region private functions
 	private void PlayerInput()
 	{
 		movement = playerActions.Movement.Move.ReadValue<Vector2>();
@@ -60,7 +58,9 @@ public class PlayerController : MonoBehaviour
 		else
 			Debug.Log("Nothing close");
 	}
+	#endregion
 
+	#region public functions
 	public void SetIInstance(IInteractable interactable)
 	{
 		interactableInstance = interactable;
@@ -70,5 +70,5 @@ public class PlayerController : MonoBehaviour
 	{
 		interactableInstance = null;
 	}
-	
+	#endregion
 }
