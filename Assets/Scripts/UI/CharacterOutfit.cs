@@ -67,6 +67,46 @@ public class CharacterOutfit : MonoBehaviour
 		
 	}
 
+	private void Update()
+	{
+		//if(Input.GetMouseButtonDown(0))
+		//{
+		//	ChangeHood(4);
+		//}
+	}
+
+	public void ChangeHood(int index)
+	{
+		playerHood.sprite = hoodOptions[index];
+
+		playerPreviewHood.sprite = hoodOptions[index];
+	}
+
+	public void ChangeTorso(int index)
+	{
+		playerTorso.sprite = torsoOptions[index];
+		playerPelvis.sprite = pelvisOptions[index];
+		playerShoulderL.sprite = shoulderOptionsL[index];
+		playerShoulderR.sprite = shoulderOptionsR[index];
+
+		playerPreviewTorso.sprite = torsoOptions[index];
+		playerPreviewPelvis.sprite = pelvisOptions[index];
+		playerPreviewShoulderL.sprite = shoulderOptionsL[index];
+		playerPreviewShoulderR.sprite = shoulderOptionsR[index];
+	}
+
+	public void ChangeAccesories(int index)
+	{
+		playerGloveL.sprite = glovesOptionsL[index];
+		playerGloveR.sprite = glovesOptionsR[index];
+		playerBootL.sprite = bootsOptionsL[index];
+		playerBootR.sprite = bootsOptionsR[index];
+
+		playerPreviewGloveL.sprite = glovesOptionsL[index];
+		playerPreviewGloveR.sprite = glovesOptionsR[index];
+		playerPreviewBootL.sprite = bootsOptionsL[index];
+		playerPreviewBootR.sprite = bootsOptionsR[index];
+	}
 
 	//   public void NextOption()
 	//   {
