@@ -12382,7 +12382,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011826580284, guid: 5b210609803658e488f512fc13a6163e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5620003
+      value: -1.28
       objectReference: {fileID: 0}
     - target: {fileID: 4000011826580284, guid: 5b210609803658e488f512fc13a6163e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12450,7 +12450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212000011468200164, guid: 5b210609803658e488f512fc13a6163e, type: 3}
       propertyPath: m_SortingOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 212000011468200164, guid: 5b210609803658e488f512fc13a6163e, type: 3}
       propertyPath: m_SortingLayerID
@@ -17628,6 +17628,7 @@ MonoBehaviour:
   - {fileID: 502158942}
   playerInventory: {fileID: 2070704570}
   preview: {fileID: 996309499}
+  inventoryOpen: 0
 --- !u!114 &1449862875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26478,6 +26479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
+  inventoryOpen: 0
   canMove: 1
 --- !u!212 &5048419235383107625
 SpriteRenderer:
