@@ -53,24 +53,6 @@ public class CharacterOutfit : MonoBehaviour
 	public List<Sprite> bootsOptionsL = new List<Sprite>();
 	public List<Sprite> bootsOptionsR = new List<Sprite>();
 
-	//public List<Sprite> legsOptionsL = new List<Sprite>();
-	//public List<Sprite> legsOptionsR = new List<Sprite>();
-
-
-	//private int currentOption = 0;
-
-	private void Awake()
-	{
-		
-	}
-
-	private void Update()
-	{
-		//if(Input.GetMouseButtonDown(0))
-		//{
-		//	ChangeHood(4);
-		//}
-	}
 
 	public void ChangeHood(int index)
 	{
@@ -104,24 +86,4 @@ public class CharacterOutfit : MonoBehaviour
 		playerPreviewBootL.sprite = bootsOptionsL[index];
 		playerPreviewBootR.sprite = bootsOptionsR[index];
 	}
-
-	//   public void NextOption()
-	//   {
-	//       currentOption++;
-
-	//       if(currentOption >= hoodOptions.Count)
-	//           currentOption = 0;
-
-	//       bodyPart.sprite = hoodOptions[currentOption];
-	//   }
-
-	//   public void PreviousOption()
-	//   {
-	//	currentOption--;
-
-	//	if (currentOption <= 0)
-	//		currentOption = hoodOptions.Count -1;
-
-	//	bodyPart.sprite = hoodOptions[currentOption];
-	//}
 }

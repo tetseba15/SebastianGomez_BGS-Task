@@ -21,7 +21,7 @@ public class PlayerStats : MonoBehaviour
 
 	private void Update()
 	{
-		cashAmountTMP.text = cash.ToString();
+		cashAmountTMP.text = "$" + cash.ToString();
 	}
 
 	private void CheckInstance()

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 	private Vector2 movement;
 	private bool interactPressed;
 	private bool isFacingRight = true;
+	[HideInInspector] public bool canMove = true;
 
 	private void Awake()
 	{
@@ -50,7 +51,11 @@ public class PlayerController : MonoBehaviour
 	#region private functions
 	private void PlayerInput()
 	{
-		movement = playerActions.Movement.Move.ReadValue<Vector2>();
+		if (canMove)
+			movement = playerActions.Movement.Move.ReadValue<Vector2>();
+		else
+			movement = Vector2.zero;
+
 		interactPressed = playerActions.Actions.Interact.WasPressedThisFrame();
 	}
 
