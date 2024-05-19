@@ -36,9 +36,6 @@ public class CharacterOutfit : MonoBehaviour
 	[SerializeField] private Image playerPreviewBootL;
 	[SerializeField] private Image playerPreviewBootR;
 
-	[Header("Sprite change")]
-    public SpriteRenderer bodyPart;
-
     [Header("Hoods Options")]
     public List<Sprite> hoodOptions = new List<Sprite>();
 
