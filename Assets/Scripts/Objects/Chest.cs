@@ -8,10 +8,23 @@ public class Chest : MonoBehaviour, IInteractable
 	[SerializeField] private string customText;
 	[SerializeField] private int money = 50;
 
+	private bool interacted = false;
+
 	public void Interact()
 	{
-		Debug.Log(customText);
-		PlayerStats.instance.AddMoney(money);
+		
+
+		if (!interacted)
+		{
+			interacted = true;
+			Debug.Log(customText);
+			PlayerStats.instance.AddMoney(money);
+		}
+		else
+		{
+			Debug.Log("Now it's empty...");
+		}
+		
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
