@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -72,8 +71,9 @@ public class Inventory : MonoBehaviour
 
 	public void OpenInventory()
 	{
-		if (!inventoryOpen)
+		if (!inventoryOpen && !playerController.inventoryOpen)
 		{
+			playerController.inventoryOpen = true;
 			inventoryOpen = true;
 			playerController.canMove = false;
 
@@ -92,6 +92,7 @@ public class Inventory : MonoBehaviour
 		}
 		else
 		{
+			playerController.inventoryOpen = false;
 			inventoryOpen = false;
 			playerController.canMove = true;
 
