@@ -14,18 +14,29 @@ public class Shopkeeper : MonoBehaviour, IInteractable
 	[SerializeField] private GameObject preview;
 	[SerializeField] private GameObject playerInventoryCloseButton;
 
+	[SerializeField] private GameObject interactIcon;
+
 	private bool shopOpen = false;
 
 	private void Awake()
 	{
 		playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+
 	}
 
 	public void Interact()
 	{
-
-		if (!shopOpen)
+		if (Inventory.instance.inventoryOpen)
 		{
+			shopOpen = false;
+			playerInventoryCloseButton.SetActive(true);
+			shopInventory.SetActive(false);
+			return;
+		}
+
+		if (!shopOpen && !playerController.inventoryOpen)
+		{
+			playerController.inventoryOpen = true;
 			shopOpen = true;
 			playerController.canMove = false;
 
@@ -34,19 +45,24 @@ public class Shopkeeper : MonoBehaviour, IInteractable
 			preview.SetActive(true);
 			playerInventoryCloseButton.SetActive(false);
 
-			//for (int i = 0; i < shopSlot.Length; i++)
-			//{
-			//	InventorySlot slot = shopSlot[i];
-			//	Item itemInSlot = slot.GetComponentInChildren<Item>();
-			//	if (itemInSlot != null)
-			//	{
-			//		itemInSlot.Selled();
-			//	}
-			//}
+			Inventory.instance.SortSellInventory();
+
+			for (int i = 0; i < shopSlot.Length; i++)
+			{
+				InventorySlot slot = shopSlot[i];
+				Item itemInSlot = slot.GetComponentInChildren<Item>();
+				if (itemInSlot != null)
+				{
+					itemInSlot.Selled();
+				}
+			}
+
+			
 		}
 		else
 		{
-			shopOpen= false;
+			playerController.inventoryOpen = false;
+			shopOpen = false;
 			playerController.canMove = true;
 
 			shopInventory.SetActive(false);
@@ -87,6 +103,7 @@ public class Shopkeeper : MonoBehaviour, IInteractable
 	{
 		if (collision.CompareTag("Player"))
 		{
+			interactIcon.SetActive(true);
 			collision.GetComponent<PlayerController>().SetIInstance(this);
 		}
 	}
@@ -95,6 +112,7 @@ public class Shopkeeper : MonoBehaviour, IInteractable
 	{
 		if (collision.CompareTag("Player"))
 		{
+			interactIcon.SetActive(false);
 			collision.GetComponent<PlayerController>().ClearIInstance();
 		}
 	}

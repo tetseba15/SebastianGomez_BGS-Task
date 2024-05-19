@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 	private Vector2 movement;
 	private bool interactPressed;
 	private bool isFacingRight = true;
+	[HideInInspector] public bool inventoryOpen = false;
 	[HideInInspector] public bool canMove = true;
 
 	private void Awake()
@@ -57,6 +58,11 @@ public class PlayerController : MonoBehaviour
 			movement = Vector2.zero;
 
 		interactPressed = playerActions.Actions.Interact.WasPressedThisFrame();
+
+		if (playerActions.Actions.Inventory.WasPressedThisFrame() && !inventoryOpen)
+		{
+			Inventory.instance.OpenInventory();
+		}
 	}
 
 	private void Move()
@@ -68,27 +74,13 @@ public class PlayerController : MonoBehaviour
 	{
 		if (interactableInstance != null)
 			interactableInstance.Interact();
-		else
-			Debug.Log("Nothing close");
+		
 	}
 
 	private void Animations()
 	{
 		animator.SetFloat("speed", movement.magnitude);
 
-		//if(rb.velocity.magnitude > 0)
-		//{
-		//	animator.SetBool("isWalking", true);
-		//}
-
-		//if (movement.x > 0.1f || movement.y > 0.1f || movement.x < -0.1f || movement.y < -0.1f)
-		//{
-		//	animator.SetFloat("speed", movement.magnitude);
-		//}
-		//else
-		//{
-		//	animator.SetFloat("speed", movement.magnitude);
-		//}
 	}
 
 	private void Flip()

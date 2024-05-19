@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
 	[SerializeField] private GameObject playerInventory;
 	[SerializeField] private GameObject preview;
 
-	private bool inventoryOpen = false;
+	public bool inventoryOpen = false;
 
 
 	private void Awake()
@@ -45,7 +45,7 @@ public class Inventory : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("Not enough money!");
+			Text.instance.Prompt("Not enough money!");
 		}
 	}
 
@@ -59,7 +59,7 @@ public class Inventory : MonoBehaviour
 	{
 		if (instance != null)
 		{
-			Debug.LogError("More than one PlayerStats instance in scene");
+			Debug.LogError("More than one Inventory instance in scene");
 			return;
 		}
 		else
@@ -98,6 +98,19 @@ public class Inventory : MonoBehaviour
 			playerInventory.SetActive(false);
 			preview.SetActive(false);
 
+		}
+	}
+
+	public void SortSellInventory()
+	{
+		for (int i = 0; i < inventorySlot.Length; i++)
+		{
+			InventorySlot slot = inventorySlot[i];
+			Item itemInSlot = slot.GetComponentInChildren<Item>();
+			if (itemInSlot != null)
+			{
+				itemInSlot.Buyed();
+			}
 		}
 	}
 

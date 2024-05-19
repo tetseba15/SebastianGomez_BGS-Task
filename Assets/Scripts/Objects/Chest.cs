@@ -7,6 +7,8 @@ public class Chest : MonoBehaviour, IInteractable
 
 	[SerializeField] private string customText;
 	[SerializeField] private int money = 50;
+	[SerializeField] private GameObject interactIcon;
+
 
 	private bool interacted = false;
 
@@ -17,20 +19,21 @@ public class Chest : MonoBehaviour, IInteractable
 		if (!interacted)
 		{
 			interacted = true;
-			Debug.Log(customText);
+			Text.instance.Prompt(customText);
 			PlayerStats.instance.AddMoney(money);
 		}
 		else
 		{
-			Debug.Log("Now it's empty...");
+			Text.instance.Prompt("Now it's empty...");
 		}
-		
+
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.CompareTag("Player"))
 		{
+			interactIcon.SetActive(true);
 			collision.GetComponent<PlayerController>().SetIInstance(this);
 		}
 	}
@@ -39,6 +42,7 @@ public class Chest : MonoBehaviour, IInteractable
 	{
 		if (collision.CompareTag("Player"))
 		{
+			interactIcon.SetActive(false);
 			collision.GetComponent<PlayerController>().ClearIInstance();
 		}
 	}

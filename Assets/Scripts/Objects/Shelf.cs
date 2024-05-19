@@ -6,16 +6,19 @@ public class Shelf : MonoBehaviour, IInteractable
 {
 
 	[SerializeField] private string customText;
+	[SerializeField] private GameObject interactIcon;
+
 
 	public void Interact()
 	{
-		Debug.Log(customText);
+			Text.instance.Prompt(customText);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.CompareTag("Player"))
 		{
+			interactIcon.SetActive(true);
 			collision.GetComponent<PlayerController>().SetIInstance(this);
 		}
 	}
@@ -24,6 +27,7 @@ public class Shelf : MonoBehaviour, IInteractable
 	{
 		if (collision.CompareTag("Player"))
 		{
+			interactIcon.SetActive(false);
 			collision.GetComponent<PlayerController>().ClearIInstance();
 		}
 	}

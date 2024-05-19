@@ -107,6 +107,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""d396f9d3-434e-4385-a57e-4767ea4f1e17"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -118,6 +127,28 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61854611-c9a8-4016-9e11-b9b2d66ebb1d"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f32c901-05a7-4864-b6da-ddecb67e64bd"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -132,6 +163,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         // Actions
         m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
         m_Actions_Interact = m_Actions.FindAction("Interact", throwIfNotFound: true);
+        m_Actions_Inventory = m_Actions.FindAction("Inventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -240,11 +272,13 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Actions;
     private List<IActionsActions> m_ActionsActionsCallbackInterfaces = new List<IActionsActions>();
     private readonly InputAction m_Actions_Interact;
+    private readonly InputAction m_Actions_Inventory;
     public struct ActionsActions
     {
         private @PlayerActions m_Wrapper;
         public ActionsActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Interact => m_Wrapper.m_Actions_Interact;
+        public InputAction @Inventory => m_Wrapper.m_Actions_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -257,6 +291,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Inventory.started += instance.OnInventory;
+            @Inventory.performed += instance.OnInventory;
+            @Inventory.canceled += instance.OnInventory;
         }
 
         private void UnregisterCallbacks(IActionsActions instance)
@@ -264,6 +301,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Inventory.started -= instance.OnInventory;
+            @Inventory.performed -= instance.OnInventory;
+            @Inventory.canceled -= instance.OnInventory;
         }
 
         public void RemoveCallbacks(IActionsActions instance)
@@ -288,5 +328,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     public interface IActionsActions
     {
         void OnInteract(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
 }
